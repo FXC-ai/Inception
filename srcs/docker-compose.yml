@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+      - "443:443"
+    volumes:
+      - ./src:/usr/share/nginx/html
+    restart: always
+    networks:
+      - wp_mdb
+
+  wp:
+    image: wordpress:latest
+    depends_on:
+      - db
+      - nginx
+    environment:
+      WORDPRESS_DB_HOST: mariadb:3306
+      WORDPRESS_DB_NAME: mariadb_database
+      WORDPRESS_DB_USER: fcoindre
+      WORDPRESS_DB_PASSWORD: password
+    volumes:
+      - wordpress_web:/var/www/html
+    ports:
+      - "8081:80"
+    networks:
+      - wp_mdb
+      - wp_ngx
+
+  mariadb:
+    image: mariadb
+    depends_on:
+      - nginx
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: mariadb_database
+      MYSQL_USER: fcoindre
+      MYSQL_PASSWORD: password
+    volumes:
+      - data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb-datas:/var/lib/mysql
+    networks:
+      - wp_mdb
+
+volumes:
+  mariadb-datas: {}
+  wordpress_web: {}
+
+networks:
+  wp_mdb: {}
+  wp_ngx: {}
