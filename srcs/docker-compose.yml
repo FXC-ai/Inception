@@ -13,9 +13,9 @@ services:
       - wp_mdb
 
   wp:
-    image: wordpress:latest
+    image: wordpress:fpm-alpine
     depends_on:
-      - db
+      - mariadb
       - nginx
     environment:
       WORDPRESS_DB_HOST: mariadb:3306
