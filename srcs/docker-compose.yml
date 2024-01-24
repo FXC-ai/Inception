@@ -1,39 +1,51 @@
-version: "3.9"
+version: "3"
 services:
-    wordpress:
-        container_name: wordpress
-        image: wordpress:fpm-alpine
-        restart: always
-        environment:
-            WORDPRESS_DB_HOST: mariadb
-            WORDPRESS_DB_USER: db_user
-            WORDPRESS_DB_PASSWORD: db_user_pass
-            WORDPRESS_DB_NAME: db_name
-        volumes:
-            - wordpress_data:/var/www/html
+  mariadb:
+    container_name: mariadb
+    networks:
+        - inception
+    build:
+        context: requirements/mariadb
+        dockerfile: Dockerfile
+    volumes:
+        - mariadb:/var/lib/mysql
+    restart: unless-stopped
+    expose:
+        - 3306
 
-    mariadb:
-        container_name: mariadb
-        image: mariadb
-        restart: always
-        environment:
-            MYSQL_DATABASE: db_name:3306
-            MYSQL_USER: db_user
-            MYSQL_PASSWORD: db_user_pass
-            MYSQL_RANDOM_ROOT_PASSWORD: 'root_pass'
-        volumes:
-            - db_data:/var/lib/mysql
+  nginx:
+    container_name: nginx
+    volumes:
+        - wordpress:/var/www/html
+    networks:
+        - inception
+    depends_on:
+        - wordpress
+    build:
+        context: requirements/nginx
+        dockerfile: Dockerfile
+    ports:
+        - 443:443
+    restart: on-failure
 
-    nginx:
-        container_name: nginx
-        image: nginx:alpine
-        restart: unless-stopped
-        ports:
-            - "443:443"
-            - "80:80"
-        volumes:
-            - wordpress_data:/tartampion/var/www/html
+  wordpress:
+    container_name: wordpress
+    volumes:
+        - wordpress:/var/www/wordpress
+    networks:
+        - inception
+    build:
+        context: requirements/wordpress
+        dockerfile: Dockerfile
+    depends_on:
+        - mariadb
+    restart: on-failure
+    expose:
+        - "9000"
 
 volumes:
-    db_data:
-    wordpress_data:
+    mariadb:
+    wordpress:
+
+networks:
+    inception:
