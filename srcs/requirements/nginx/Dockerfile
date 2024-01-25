@@ -6,7 +6,6 @@ RUN apt upgrade -y
 RUN apt-get install -y nginx
 
 RUN apt-get install procps -y
-
 RUN apt install -y vim
 RUN apt install -y curl
 
@@ -20,10 +19,11 @@ RUN cat /etc/nginx/ssl/inception.crt /etc/nginx/ssl/inception.key
 
 RUN mkdir -p /var/run/nginx
 
-RUN chmod 755 /var/www/html
-RUN chown -R www-data:www-data /var/www/html
+# ici il faudrat ajouter /wordpress apres /var/www
+RUN chmod 755 /var/www
+RUN chown -R www-data:www-data /var/www
 
-COPY conf/conf0.conf /etc/nginx/conf.d/conf0.conf
+COPY conf/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 443
 

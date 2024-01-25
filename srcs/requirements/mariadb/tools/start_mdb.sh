@@ -1,40 +1,33 @@
+
+echo "------------------------------- MARIADB START -------------------------------------"
 service mysql start;
 
-# echo "Waiting for MySQL to start";
-# sleep(15);
+mysql -e "CREATE DATABASE IF NOT EXISTS \' db_test \'";
 
-echo "Creating user database"
-mysql -e "CREATE USER IF NOT EXISTS 'fcoindre'@'localhost' IDENTIFIED BY 'password';"
+mysql -e "CREATE USER IF NOT EXISTS \' fcoindre \'@\' % \' IDENTIFIED BY \' password
 
-echo "Creating database"
-mysql -e "CREATE DATABASE IF NOT EXISTS test_db;"
+mysql -e "GRANT ALL PRIVILEGES ON db_test.* TO 'fcoindre'@'%' IDENTIFIED BY 'password'";
 
-echo "Granting privileges"
-mysql -e "GRANT ALL PRIVILEGES ON test_db.* TO 'fcoindre'@'localhost' IDENTIFIED BY 'password';"
+# mysql  -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';"
 
-echo "Root password modification"
-mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '';"
+# mysql  -e "FLUSH PRIVILEGES";
 
-echo "Flushing privileges"
-mysql -e "FLUSH PRIVILEGES;"
+# mysqladmin  -p${SQL_ROOT_PASSWORD} shutdown
 
-echo "Shutting down MySQL";
-mysqladmin -u root -p'' shutdown
-
-echo "Restarting MySQL"
-exec mysqld_safe
+# exec mysqld_safe
 
 
-# mysql -e "CREATE DATABASE IF NOT EXISTS \' ${SQL_DATABASE} \'";
 
-# mysql -e "CREATE USER IF NOT EXISTS \' ${SQL_USER} \'@\' % \' IDENTIFIED BY \' ${SQL_PASSWORD}
+# mysql  -e "CREATE DATABASE IF NOT EXISTS \' ${SQL_DATABASE} \'";
 
-# mysql -e "GRANT ALL PRIVILEGES ON ${SQL_DATABASE}.* TO '${SQL_USER}'@'%' IDENTIFIED BY '${SQL_PASSWORD}'";
+# mysql  -e "CREATE USER IF NOT EXISTS \' ${SQL_USER} \'@\' % \' IDENTIFIED BY \' ${SQL_PASSWORD}
 
-# mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';"
+# mysql  -e "GRANT ALL PRIVILEGES ON ${SQL_DATABASE}.* TO '${SQL_USER}'@'%' IDENTIFIED BY '${SQL_PASSWORD}'";
 
-# mysql -e "FLUSH PRIVILEGES";
+# mysql  -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';"
 
-# mysqladmin -u root -p${SQL_ROOT_PASSWORD} shutdown
+# mysql  -e "FLUSH PRIVILEGES";
+
+# mysqladmin  -p${SQL_ROOT_PASSWORD} shutdown
 
 # exec mysqld_safe
