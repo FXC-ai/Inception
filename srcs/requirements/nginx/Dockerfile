@@ -20,7 +20,7 @@ RUN cat /etc/nginx/ssl/inception.crt /etc/nginx/ssl/inception.key
 RUN mkdir -p /var/run/nginx
 
 # ici il faudrat ajouter /wordpress apres /var/www
-RUN chmod 755 /var/www
+RUN chmod -R 755 /var/www
 RUN chown -R www-data:www-data /var/www
 
 COPY conf/nginx.conf /etc/nginx/nginx.conf

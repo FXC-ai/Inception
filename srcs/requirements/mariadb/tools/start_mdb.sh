@@ -1,33 +1,30 @@
 
 echo "------------------------------- MARIADB START -------------------------------------"
-service mysql start;
 
-mysql -e "CREATE DATABASE IF NOT EXISTS \' db_test \'";
+mysqld --initialize --user=mysql --datadir=/var/lib/mysql;
 
-mysql -e "CREATE USER IF NOT EXISTS \' fcoindre \'@\' % \' IDENTIFIED BY \' password
+chown -R mysql:mysql /var/lib/mysql;
+chown -R mysql:mysql /run/mysqld;
 
-mysql -e "GRANT ALL PRIVILEGES ON db_test.* TO 'fcoindre'@'%' IDENTIFIED BY 'password'";
+# launch mysqld in background
+mysqld --user=mysql --datadir=/var/lib/mysql &
 
-# mysql  -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';"
-
-# mysql  -e "FLUSH PRIVILEGES";
-
-# mysqladmin  -p${SQL_ROOT_PASSWORD} shutdown
-
-# exec mysqld_safe
+pid=$!
 
 
+sleep 10
 
-# mysql  -e "CREATE DATABASE IF NOT EXISTS \' ${SQL_DATABASE} \'";
+#Setting up the database
 
-# mysql  -e "CREATE USER IF NOT EXISTS \' ${SQL_USER} \'@\' % \' IDENTIFIED BY \' ${SQL_PASSWORD}
+mysql -u root -p'mypass' -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'mypass';"
+mysql -u root -p'mypass' -e "CREATE DATABASE IF NOT EXISTS 'db_wordpress';"
+mysql -u root -p'mypass' -e "CREATE USER IF NOT EXISTS 'fcoindre' IDENTIFIED BY 'mypass';"
+mysql -u root -p'mypass' -e "GRANT ALL PRIVILEGES ON *.* TO 'fcoindre';"
+mysql -u root -p'mypass' -e "FLUSH PRIVILEGES;"
 
-# mysql  -e "GRANT ALL PRIVILEGES ON ${SQL_DATABASE}.* TO '${SQL_USER}'@'%' IDENTIFIED BY '${SQL_PASSWORD}'";
+# kill mysqld
+kill "$pid"
+wait "$pid"
 
-# mysql  -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';"
-
-# mysql  -e "FLUSH PRIVILEGES";
-
-# mysqladmin  -p${SQL_ROOT_PASSWORD} shutdown
-
-# exec mysqld_safe
+# launch mysqld in foreground, it replace the shell processus by the mysqld processus
+exec mysqld --user=mysql --datadir=/var/lib/mysql
