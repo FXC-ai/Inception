@@ -1,4 +1,10 @@
 version: "3"
+
+volumes:
+    mariadb:
+    wordpress_v:
+
+
 services:
   mariadb:
     container_name: mariadb
@@ -12,11 +18,16 @@ services:
     restart: unless-stopped
     expose:
         - 3306
+    environment:
+        - MARIADB_ROOT_PASSWORD=mypass
+        - MARIADB_DB_NAME=db_wordpress
+        - MARIADB_USER=fcoindre
+        - MARIADB_PASS=mypass
 
   nginx:
     container_name: nginx
-    volumes:
-        - wordpress:/var/www/html
+    #volumes:
+    #    - wordpress:/var/www/wordpress
     networks:
         - inception
     depends_on:
@@ -31,7 +42,7 @@ services:
   wordpress:
     container_name: wordpress
     volumes:
-        - wordpress:/var/www/wordpress
+        - wordpress_v:/var/www/wordpress
     networks:
         - inception
     build:
@@ -43,9 +54,7 @@ services:
     expose:
         - "9000"
 
-volumes:
-    mariadb:
-    wordpress:
+
 
 networks:
     inception:
