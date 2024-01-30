@@ -19,6 +19,8 @@ COPY conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
 COPY tool/start_wdp.sh /usr/local/start_wdp.sh
 
+# COPY conf/wp-config.php /var/www/wordpress/wp-config.php
+
 RUN chmod +x /usr/local/start_wdp.sh
 
 EXPOSE 9000

@@ -31,10 +31,12 @@ mysql -u root -p${MARIADB_ROOT_PASSWORD} -e "GRANT ALL PRIVILEGES ON *.* TO '${M
 echo "FLUSH PRIVILEGES;"
 mysql -u root -p${MARIADB_ROOT_PASSWORD} -e "FLUSH PRIVILEGES;"
 
+echo "TEST MARIADB"
+mysql -u root -p${MARIADB_ROOT_PASSWORD} -e "SHOW DATABASES;"
 
 # kill mysqld
 kill "$pid"
 wait "$pid"
 
-# launch mysqld in foreground, it replace the shell processus by the mysqld processus
+# launch mysqld in foreground, it replaces the shell processus by the mysqld processus
 exec mysqld --user=mysql --datadir=/var/lib/mysql

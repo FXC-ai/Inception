@@ -2,17 +2,17 @@ version: "3"
 
 volumes:
   mariadb_v:
+    driver: local
 #    name: mariadb_v
-#    driver: local
 #    driver_opts:
-#      device: /Users/laendrun/data/mariadb
+#      device: /Users/fcoindre/data/mariadb
 #      type: none
 #      o: bind
   wordpress_v:
+    driver: local
 #    name: wordpress_v
-#    driver: local
 #    driver_opts:
-#      device: /Users/laendrun/data/wordpress/
+#      device: /Users/fcoindre/data/wordpress/
 #      type: none
 #      o: bind
 
@@ -29,7 +29,7 @@ services:
         - mariadb_v:/var/lib/mysql
     restart: unless-stopped
     ports:
-        - 3306:3306
+        - "3306"
     environment:
         - MARIADB_ROOT_PASSWORD=mypass
         - MARIADB_DB_NAME=db_wordpress
@@ -48,7 +48,7 @@ services:
         context: requirements/nginx
         dockerfile: Dockerfile
     ports:
-        - 443:443
+        - "443:443"
     restart: on-failure
 
   wordpress:
@@ -64,12 +64,8 @@ services:
         - mariadb
     restart: on-failure
     ports:
-        - 9000:9000
-    environment:
-      WORDPRESS_DB_HOST: mariadb
-      WORDPRESS_DB_USER: fcoindre
-      WORDPRESS_DB_PASSWORD: mypass
-      WORDPRESS_DB_NAME: db_wordpress
+        - "9000"
 
 networks:
     inception:
+        driver: bridge
