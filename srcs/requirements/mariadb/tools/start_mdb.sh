@@ -12,7 +12,6 @@ mysqld --user=mysql --datadir=/var/lib/mysql &
 
 pid=$!
 
-
 sleep 5
 
 #Setting up the database
