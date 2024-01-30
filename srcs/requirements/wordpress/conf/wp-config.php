@@ -21,19 +21,19 @@
 
 // ** Réglages MySQL - Votre hébergeur doit vous fournir ces informations. ** //
 /** Nom de la base de données de WordPress. */
-define('DB_NAME', 'db_wordpress');
+define( 'DB_NAME', 'db_wordpress' );
 
 /** Utilisateur de la base de données MySQL. */
-define('DB_USER', 'fcoindre');
+define( 'DB_USER', 'fcoindre' );
 
 /** Mot de passe de la base de données MySQL. */
-define('DB_PASSWORD', 'mypass');
+define( 'DB_PASSWORD', 'mypass' );
 
 /** Adresse de l’hébergement MySQL. */
-define('DB_HOST', 'mariadb:3306');
+define( 'DB_HOST', 'mariadb' );
 
 /** Jeu de caractères à utiliser par la base de données lors de la création des tables. */
-define('DB_CHARSET', 'utf8');
+define( 'DB_CHARSET', 'utf8mb4' );
 
 /** Type de collation de la base de données.
   * N’y touchez que si vous savez ce que vous faites.
@@ -51,14 +51,14 @@ define('DB_COLLATE', '');
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         'put your unique phrase here');
-define('SECURE_AUTH_KEY',  'put your unique phrase here');
-define('LOGGED_IN_KEY',    'put your unique phrase here');
-define('NONCE_KEY',        'put your unique phrase here');
-define('AUTH_SALT',        'put your unique phrase here');
-define('SECURE_AUTH_SALT', 'put your unique phrase here');
-define('LOGGED_IN_SALT',   'put your unique phrase here');
-define('NONCE_SALT',       'put your unique phrase here');
+define( 'AUTH_KEY',         'JymzA#K2)wQ}nDN[C9-)nK@w;:g0lGS}fo04X>*1iW;|)F1uwp(S,1X>BdhK+41 ' );
+define( 'SECURE_AUTH_KEY',  'KJ;D4:U.6Dp:<7m}8NSxvljMXn<_yq[8~^wlGz.{g!AK3Hn,@`qxv6`=T;D($DOI' );
+define( 'LOGGED_IN_KEY',    '3wynUGX0U&bsZ6~tJpTJbzUMlf;55j`ja@8p!=a>?oT4/dt{3/SH_; g5WrxOrO$' );
+define( 'NONCE_KEY',        '(*~Gl+Ng*NkQ&C^vZ14wfG`RHYRxDQjx}f*$ 35^q,I{^zb~w^~iW_46<U}s~_u?' );
+define( 'AUTH_SALT',        '9Wq`2Y o{hjb&ZZfGo,f]z8Lb5X?;~~W[|rt-X8{gX#l2di.[0B0GYLiv]TnOD8y' );
+define( 'SECURE_AUTH_SALT', 'J#UJF{{N$HL0tOMQhbRXd1dUuOsQ7]w*y^Q!iRzZQs8q~J_=w}F0fX,,Z8K=uR*@' );
+define( 'LOGGED_IN_SALT',   '!/l)^_ DW|c:$}~5*[SG@sf~gxr)ww4(~|Aw~?>)%-G=uWbb`o>3.t]^.&PtRWS_' );
+define( 'NONCE_SALT',       '!ofoHgkqK:2b<D ]n${{TA)j?X8H<1AS=Lw3Qz*XJ$i|ddjD#zeSk0{c46hT[R3}' );
 /**#@-*/
 
 /**
@@ -66,7 +66,7 @@ define('NONCE_SALT',       'put your unique phrase here');
  *
  * Vous pouvez installer plusieurs WordPress sur une seule base de données
  * si vous leur donnez chacune un préfixe unique.
- * N’utilisez que des chiffres, des lettres non-accentuées, et des caractères soulignés !
+ * N’utilisez que des chiffres, des lettres non-accentuées, et des caractères soulignés !
  */
 $table_prefix = 'wp_';
 
@@ -90,7 +90,7 @@ define('WP_DEBUG', false);
 
 /** Chemin absolu vers le dossier de WordPress. */
 if ( !defined('ABSPATH') )
-        define('ABSPATH', dirname(__FILE__) . '/');
+	define('ABSPATH', dirname(__FILE__) . '/');
 
 /** Réglage des variables de WordPress et de ses fichiers inclus. */
 require_once(ABSPATH . 'wp-settings.php');

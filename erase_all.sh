@@ -10,4 +10,6 @@ docker image rm -f $(docker image ls -a -q)
 
 docker volume rm -f $(docker volume ls -q)
 
+docker system prune -a -f
+
 echo "All containers and images are removed"
