@@ -18,10 +18,11 @@ RUN openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/ngin
 RUN cat /etc/nginx/ssl/inception.crt /etc/nginx/ssl/inception.key
 
 RUN mkdir -p /var/run/nginx
+RUN mkdir -p /var/www/wordpress
 
 # ici il faudrat ajouter /wordpress apres /var/www
-# RUN chmod -R 755 /var/www/wordpress
-# RUN chown -R www-data:www-data /var/www/wordpress
+RUN chmod -R 755 /var/www/wordpress
+RUN chown -R www-data:www-data /var/www/wordpress
 
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
@@ -31,7 +32,6 @@ RUN chmod +x /usr/local/start_ngx.sh
 
 EXPOSE 443
 
-# CMD ["nginx", "-g", "daemon off;"]
 
 ENTRYPOINT ["sh", "/usr/local/start_ngx.sh"]
 

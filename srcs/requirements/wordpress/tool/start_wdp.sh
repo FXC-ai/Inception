@@ -11,23 +11,13 @@ while ! mariadb -u $MARIADB_USER --password=$MARIADB_PASS -h mariadb -P 3306 --s
 	echo "mariadb n'est pas encore pret"
 done
 
-
-
 echo "ALORS VOILA LES DATABASES :"
 mariadb -u $MARIADB_USER --password=$MARIADB_PASS -h mariadb -P 3306 -e "SHOW DATABASES;"
-
-
-
-
-echo "AU FOND DU FUN\n"
-
-
 
 if [ -e /var/www/wordpress/wp-config.php ]
 then echo "wp-config existe."
 else
 	
-
 	chown -R www-data:www-data /var/www/*
 	chmod -R 755 /var/www/*
 	mkdir -p /var/www/wordpress
