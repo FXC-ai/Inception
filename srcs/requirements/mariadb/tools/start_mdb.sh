@@ -12,7 +12,10 @@ mysqld --user=mysql --datadir=/var/lib/mysql &
 
 pid=$!
 
-sleep 5
+while ! mysqladmin ping -u root --password="${MARIADB_ROOT_PASSWORD}" --silent; do
+    echo "MariaDB n'est pas encore pret..."
+    sleep 1
+done
 
 #Setting up the database
 #echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ROOT_PASSWORD}';"
