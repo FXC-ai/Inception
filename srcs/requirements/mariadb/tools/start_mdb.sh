@@ -1,44 +1,39 @@
-
 echo "------------------------------- MARIADB START -------------------------------------"
 
+# Initialisation de la base de données
 mysqld --initialize --user=mysql --datadir=/var/lib/mysql;
 
 chown -R mysql:mysql /var/lib/mysql;
 chown -R mysql:mysql /run/mysqld;
 
-# launch mysqld in background
-echo "Launching mariadb in background;"
+# Lancement de mariadb en arrière plan
 mysqld --user=mysql --datadir=/var/lib/mysql &
 
 pid=$!
 
+# Attente de la fin de lancement de mariadb
 while ! mysqladmin ping -u root --password="${MARIADB_ROOT_PASSWORD}" --silent; do
     echo "MariaDB n'est pas encore pret..."
     sleep 1
 done
 
-#Setting up the database
-#echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ROOT_PASSWORD}';"
+# Configuration de la base de données
 mysql -u root -p${MARIADB_ROOT_PASSWORD} -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ROOT_PASSWORD}';"
-
-#echo "CREATE DATABASE IF NOT EXISTS;"
 mysql -u root -p${MARIADB_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS ${MARIADB_DB_NAME};"
-
-#echo "CREATE USER IF NOT EXISTS '${MARIADB_USER}' IDENTIFIED BY '${MARIADB_ROOT_PASSWORD}';"
 mysql -u root -p${MARIADB_ROOT_PASSWORD} -e "CREATE USER IF NOT EXISTS '${MARIADB_USER}' IDENTIFIED BY '${MARIADB_PASS}';"
-
-#echo "GRANT ALL PRIVILEGES ON *.* TO '${MARIADB_USER}';"
 mysql -u root -p${MARIADB_ROOT_PASSWORD} -e "GRANT ALL PRIVILEGES ON *.* TO '${MARIADB_USER}';"
-
-#echo "FLUSH PRIVILEGES;"
 mysql -u root -p${MARIADB_ROOT_PASSWORD} -e "FLUSH PRIVILEGES;"
 
-#echo "TEST MARIADB"
+# Affichage des bases de données dans le terminal
+echo "------------------\n"
 mysql -u root -p${MARIADB_ROOT_PASSWORD} -e "SHOW DATABASES;"
+echo "------------------\n"
+mysql -u root -p${MARIADB_ROOT_PASSWORD} -e "SELECT User FROM mysql.user"
+echo "------------------\n"
 
-# kill mysqld
+# Kill de mysqld
 kill "$pid"
 wait "$pid"
 
-# launch mysqld in foreground, it replaces the shell processus by the mysqld processus
+# Remplacement du processus shell par mysqld
 exec mysqld --user=mysql --datadir=/var/lib/mysql
