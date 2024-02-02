@@ -3,18 +3,18 @@ version: "3"
 volumes:
   mariadb_v:
     driver: local
-#    name: mariadb_v
-#    driver_opts:
-#      device: /Users/fcoindre/data/mariadb
-#      type: none
-#      o: bind
+    name: mariadb_v
+    driver_opts:
+      device: /Users/fcoindre/data/mariadb/
+      type: none
+      o: bind
   wordpress_v:
     driver: local
-#    name: wordpress_v
-#    driver_opts:
-#      device: /Users/fcoindre/data/wordpress/
-#      type: none
-#      o: bind
+    name: wordpress_v
+    driver_opts:
+      device: /Users/fcoindre/data/wordpress/
+      type: none
+      o: bind
 
 
 services:
@@ -28,13 +28,6 @@ services:
     volumes:
         - mariadb_v:/var/lib/mysql
     restart: unless-stopped
-    #ports:
-        #- "3306"
-    #environment:
-    #    - MARIADB_ROOT_PASSWORD=mypass
-    #    - MARIADB_DB_NAME=db_wordpress
-    #    - MARIADB_USER=fcoindre
-    #    - MARIADB_PASS=mypass
     env_file: .env
 
   nginx:
@@ -66,8 +59,6 @@ services:
     restart: on-failure
     env_file: .env
 
-    #ports:
-        #- "9000"
 
 networks:
     inception:
