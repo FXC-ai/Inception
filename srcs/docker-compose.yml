@@ -16,7 +16,6 @@ volumes:
       type: none
       o: bind
 
-
 services:
   mariadb:
     container_name: mariadb
@@ -58,7 +57,6 @@ services:
         - mariadb
     restart: on-failure
     env_file: .env
-
 
 networks:
     inception:
