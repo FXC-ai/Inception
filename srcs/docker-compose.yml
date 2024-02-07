@@ -5,16 +5,20 @@ volumes:
     driver: local
     name: mariadb_v
     driver_opts:
-      device: /Users/francois-xavier/data/mariadb/
+      device: /Users/fcoindre/data/mariadb/
       type: none
       o: bind
   wordpress_v:
     driver: local
     name: wordpress_v
     driver_opts:
-      device: /Users/francois-xavier/data/wordpress/
+      device: /Users/fcoindre/data/wordpress/
       type: none
       o: bind
+
+networks:
+    inception:
+        driver: bridge
 
 services:
   mariadb:
@@ -58,6 +62,3 @@ services:
     restart: on-failure
     env_file: .env
 
-networks:
-    inception:
-        driver: bridge
