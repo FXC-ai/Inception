@@ -12,10 +12,7 @@ mysqld --user=mysql --datadir=/var/lib/mysql &
 pid=$!
 
 # Attente de la fin de lancement de mariadb
-while ! mysqladmin ping -u root --password="${MARIADB_ROOT_PASSWORD}" --silent; do
-    echo "MariaDB n'est pas encore pret..."
-    sleep 1
-done
+sleep 10
 
 # Configuration de la base de données
 mysql -u root -p${MARIADB_ROOT_PASSWORD} -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ROOT_PASSWORD}';"
@@ -33,7 +30,7 @@ echo "------------------\n"
 
 # Kill de mysqld
 kill "$pid"
-wait "$pid"
+# wait "$pid"
 
 # Remplacement du processus shell par mysqld
 exec mysqld --user=mysql --datadir=/var/lib/mysql

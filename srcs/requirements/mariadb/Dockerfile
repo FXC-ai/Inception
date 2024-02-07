@@ -2,7 +2,7 @@ FROM debian:buster
 
 #Installation de mariaDB
 RUN apt update -y && apt upgrade -y
-RUN apt-get install -y mariadb-server
+RUN apt-get install -y mariadb-server procps
 
 #Creation du repertoire de travail
 RUN mkdir -p /run/mysqld /var/lib/mysql

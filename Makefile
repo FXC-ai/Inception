@@ -5,7 +5,7 @@ PATH_V_MARIADB = /Users/fcoindre/data/mariadb
 PATH_TO_ENV_FILE = /Users/fcoindre/Desktop/.private_env
 RESET_COLOR = \033[0m
 
-all : prepare down build run-daemon
+all : prepare down build run
 
 run:
 	docker-compose -f ${PATH_DOCKER_COMPOSE} -p ${NAME} up
@@ -39,6 +39,7 @@ clean: down
 fclean: down
 	docker system prune -a --volumes
 	docker volume rm $$(docker volume ls -q)
+	rm -rf ~/data
 
 re: fclean all
 
