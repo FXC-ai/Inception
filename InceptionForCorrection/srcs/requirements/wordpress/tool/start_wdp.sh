@@ -35,5 +35,5 @@ else
 
 fi
 
-# Lancement de php-fpm
+# Lancement de php-fpm en foreground
 php-fpm7.3 -F
