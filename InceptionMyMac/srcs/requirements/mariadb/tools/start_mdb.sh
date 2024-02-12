@@ -30,7 +30,6 @@ echo "------------------\n"
 
 # Kill de mysqld
 kill "$pid"
-# wait "$pid"
 
 # Remplacement du processus shell par mysqld
 exec mysqld --user=mysql --datadir=/var/lib/mysql
