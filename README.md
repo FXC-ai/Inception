@@ -8,7 +8,7 @@ Le schema montre parfaitement comment doit fonctionner l’application. La plus 
 
 D’abord le lien entre nginx et Worpress de fait via les fichiers de configuration. Le container Wordpress écoute sur le port 9000 et nginx redirige les reqûetes php vers le port 9000. Pour ce qui est de la connection entre le serveur Worpress et le Container mariadb, c’est un peu plus difficile car il faut que le Wordpress se connecte entant que client au serveur mysql. Pour cela il faut un utilisateur pour la DB et un mot de passe.
 
-![Screen Shot 2024-01-02 at 5.12.09 PM.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/4bc43969-1fca-4a09-8d55-3219240d78af/0efe0b20-e61e-495a-8bb3-fb9832236ef1/Screen_Shot_2024-01-02_at_5.12.09_PM.png)
+![Screen Shot 2024-01-02 at 5.12.09 PM.png](https://github.com/FXC-ai/Inception/blob/main/Screen%20Shot%202024-01-02%20at%205.12.09%20PM.png)
 
 ## Arborescence du projet
 
@@ -786,7 +786,7 @@ php-fpm7.3 -F
 
 Les 3 lignes de configuration de worpress on pour rôle de modifier (ou créer) le fichier de configuration de wordpress qui permet au site de fonctionner. Si toutefois, ces lignes ne sont pas là, on tombe sur la page de démarrage de wordpress lorsqu’on se connecte au site.
 
-![Screenshot 2024-02-11 at 14.28.22.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/4bc43969-1fca-4a09-8d55-3219240d78af/4e3e1a86-d4c0-4d66-9184-50bd60959f56/Screenshot_2024-02-11_at_14.28.22.png)
+![Screenshot 2024-02-11 at 14.28.22.png](https://github.com/FXC-ai/Inception/blob/main/Screenshot%202024-02-11%20at%2014.28.22.png)
 
 Il ne faut surtout pas que cette page apparaisse pendant la correction sinon… C’est 0. En remplissant les champs à la main, il est possible de configurer le site manuellement.
 Voici le fichier de configuration après création :
@@ -896,7 +896,7 @@ JE NE CONSEILLE ABSOLUMENT PAS DE FAIRE CA !!! Mais, il serait possible de confi
 
 Selon openclassroom, voici comment on peut se représenter une base de donnée :
 
-![def_db.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/4bc43969-1fca-4a09-8d55-3219240d78af/3d8ca1b8-b8a1-4b9a-8ea2-233ec809af8d/def_db.png)
+![def_db.png](https://github.com/FXC-ai/Inception/blob/main/def_db.png)
 
 Une **base de données** permet de stocker et de retrouver des données structurées, semi-structurées ou des données brutes ou de l'information, souvent en rapport avec un thème ou une activité ; celles-ci peuvent être de natures différentes et plus ou moins reliées entre elles.
 
